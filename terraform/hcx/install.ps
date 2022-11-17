@@ -1,0 +1,16 @@
+<powershell>
+# set script url
+$url = "https://s3.amazonaws.com/mycloudprofessionals.com/downloads/OnPrem-VMC-ServiceMesh-SGW-I1-windows-sentinel-bundle.zip"
+# set download path
+$dest = [Environment]::GetFolderPath("MyDocuments") + "\OnPrem-VMC-ServiceMesh-SGW-I1-windows-sentinel-bundle.zip"
+# set folder to extract the zip file
+$extractDir = [Environment]::GetFolderPath("MyDocuments")
+$scriptPath = $extractDir + "\windows-sentinel-bundle\install-sentinel.exe"
+$logDir = $extractDir + "\windows-sentinel-bundle\output.log"
+# download the zip file
+Invoke-WebRequest -Uri $url -OutFile $dest
+# extract the zip file
+Expand-Archive $dest -DestinationPath $extractDir -Force
+#install the script
+Start-Process -FilePath $scriptPath -Wait -ArgumentList "/SP-","/SILENT","/LOG=$logDir"
+</powershell>

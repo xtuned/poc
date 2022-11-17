@@ -1,0 +1,5 @@
+bucket  = "cloud-terraformstate"
+key     = "infra/demo/windows/terraform.tfstate"
+workspace_key_prefix = "projects"
+region = "us-east-1"
+encrypt = true
