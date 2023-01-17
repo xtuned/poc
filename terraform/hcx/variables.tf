@@ -36,3 +36,14 @@ variable "attach_public_ip" {
   type = bool
   default = false
 }
+
+variable "tags" {
+  description = "tags to associate to this resource"
+  type = map(string)
+}
+variable "vms" {
+  description = "vm names"
+  type = map(object({
+    Name = string
+  }))
+}

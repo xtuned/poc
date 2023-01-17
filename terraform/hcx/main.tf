@@ -5,7 +5,7 @@ resource "tls_private_key" "this" {
 }
 # create key
 resource "aws_key_pair" "this" {
-  key_name   = "ec2-ssh-key"
+  key_name   = "${var.stack_name}-ec2-ssh-key"
   public_key = tls_private_key.this.public_key_openssh
 }
 
@@ -37,6 +37,7 @@ resource "aws_security_group" "this" {
 
 #lunch the ec2
 resource "aws_instance" "this" {
+  for_each = var.vms
   ami = data.aws_ssm_parameter.ami.value
   instance_type = var.instance_type
   subnet_id = var.subnet_id
@@ -46,5 +47,7 @@ resource "aws_instance" "this" {
   associate_public_ip_address = var.attach_public_ip
   user_data = templatefile("${path.module}/install.ps",{})
   get_password_data = true
-
+  tags = {
+    Name = each.value.Name
+  }
 }
