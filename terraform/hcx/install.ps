@@ -1,6 +1,4 @@
 <powershell>
-#rename this instance
-Rename-Computer -NewName "${computer_name}" -Force 
 # set script url
 $url = "https://s3.amazonaws.com/mycloudprofessionals.com/downloads/OnPrem-VMC-ServiceMesh-SGW-I1-windows-sentinel-bundle.zip"
 # set download path
@@ -15,6 +13,7 @@ Invoke-WebRequest -Uri $url -OutFile $dest
 Expand-Archive $dest -DestinationPath $extractDir -Force
 #install the script
 Start-Process -FilePath $scriptPath -Wait -ArgumentList "/SP-","/SILENT","/LOG=$logDir"
-#reboot
-shutdown -r -t 0
+#Set-Service -Name BITS -StartupType Automatic
+#rename this instance
+#Rename-Computer -NewName "${computer_name}" -Force
 </powershell>
