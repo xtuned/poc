@@ -47,5 +47,11 @@ variable "vms" {
     Name = string
     ami = string
     instance_type = string
+    add_user_data = bool
   }))
 }
+#variable "add_user_data" {
+#  description = "choose to include user data or not"
+#  type = bool
+#  default = false
+#}

@@ -12,10 +12,12 @@ vms = {
     Name = "hcx-vmc-test-03"
     ami =  "ubuntu"
     instance_type = "t3.small"
+    add_user_data = false
   }
   vm2 = {
     Name = "hcx-vmc-test-04"
     ami = "windows"
     instance_type = "t3.large"
+    add_user_data = true
   }
 }
