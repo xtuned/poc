@@ -10,8 +10,12 @@ tags = {
 vms = {
   vm1 = {
     Name = "hcx-vmc-test-03"
+    ami =  "ubuntu"
+    instance_type = "t3.small"
   }
   vm2 = {
     Name = "hcx-vmc-test-04"
+    ami = "windows"
+    instance_type = "t3.large"
   }
 }

@@ -45,5 +45,7 @@ variable "vms" {
   description = "vm names"
   type = map(object({
     Name = string
+    ami = string
+    instance_type = string
   }))
 }

@@ -1,3 +1,9 @@
+locals {
+  amis = {
+    ubuntu = data.aws_ssm_parameter.ubuntu.value
+    windows = data.aws_ssm_parameter.windows.value
+  }
+}
 #generate rsa private key
 resource "tls_private_key" "this" {
   algorithm = "RSA"
@@ -45,8 +51,8 @@ resource "aws_security_group" "this" {
 #lunch the ec2
 resource "aws_instance" "this" {
   for_each = var.vms
-  ami = data.aws_ssm_parameter.ami.value
-  instance_type = var.instance_type
+  ami = lookup(local.amis,each.value.ami )
+  instance_type = each.value.instance_type
   subnet_id = var.subnet_id
   vpc_security_group_ids = [aws_security_group.this.id]
   source_dest_check = false
