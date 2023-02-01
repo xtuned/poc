@@ -27,6 +27,13 @@ resource "aws_security_group" "this" {
     cidr_blocks = var.cidr_blocks
     description = "Allow incoming RDP connections"
   }
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = var.cidr_blocks
+    description = "Allow incoming RDP connections"
+  }
   egress {
     from_port   = 0
     to_port     = 0
