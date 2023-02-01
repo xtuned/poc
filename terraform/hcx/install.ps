@@ -13,7 +13,7 @@ Invoke-WebRequest -Uri $url -OutFile $dest
 Expand-Archive $dest -DestinationPath $extractDir -Force
 #install the script
 Start-Process -FilePath $scriptPath -Wait -ArgumentList "/SP-","/SILENT","/LOG=$logDir"
-#Set-Service -Name BITS -StartupType Automatic
+Set-Service -Name VMwareHCXOSAMSentinelService -StartupType Automatic
 #rename this instance
-#Rename-Computer -NewName "${computer_name}" -Force
+Rename-Computer -NewName "${computer_name}" -Force -Restart
 </powershell>
