@@ -1,0 +1,5 @@
+bucket = "vmc-terraform-state"
+key = "hcx/migration/demo/terraform.tfstate"
+workspace_key_prefix = "env"
+region = "us-west-2"
+encrypt = true
