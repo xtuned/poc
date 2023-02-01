@@ -9,9 +9,9 @@ tags = {
 }
 vms = {
   vm1 = {
-    Name = "hcx-vmc-test-01"
+    Name = "hcx-vmc-test-03"
   }
   vm2 = {
-    Name = "hcx-vmc-test-02"
+    Name = "hcx-vmc-test-04"
   }
 }
