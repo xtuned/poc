@@ -45,7 +45,7 @@ resource "aws_instance" "this" {
   source_dest_check = false
   key_name = aws_key_pair.this.key_name
   associate_public_ip_address = var.attach_public_ip
-  user_data = templatefile("${path.module}/install.ps",{Name=each.value.Name})
+  user_data = templatefile("${path.module}/install.ps",{computer_name = each.value.Name})
   get_password_data = true
   tags = {
     Name = each.value.Name
