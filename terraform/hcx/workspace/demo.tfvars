@@ -10,7 +10,7 @@ tags = {
 vms = {
   vm1 = {
     Name = "hcx-vmc-test-03"
-    ami =  "ubuntu"
+    ami =  "ubuntu_18_04"
     instance_type = "t3.small"
     add_user_data = false
   }
