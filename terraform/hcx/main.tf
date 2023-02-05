@@ -59,7 +59,7 @@ resource "aws_instance" "this" {
   key_name = aws_key_pair.this.key_name
   associate_public_ip_address = var.attach_public_ip
   user_data = each.value.add_user_data ? templatefile("${path.module}/install.ps",{computer_name = each.value.Name}): null
-  get_password_data = true
+  get_password_data = each.value.ami == "windows" ? true : false
   tags = {
     Name = each.value.Name
   }
