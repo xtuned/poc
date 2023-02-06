@@ -1,6 +1,6 @@
 output "admin_password" {
-  value = {
-    for k, v in aws_instance.this: k => rsadecrypt(v.password_data,tls_private_key.this.private_key_pem)
+  value =  {
+    for k, v in aws_instance.this: k => v.get_password_data  ? rsadecrypt(v.password_data,tls_private_key.this.private_key_pem) : null
   }
   sensitive = true
 }
