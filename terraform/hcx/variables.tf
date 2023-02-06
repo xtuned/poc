@@ -19,12 +19,6 @@ variable "stack_name" {
   type = string
 }
 
-variable "cidr_blocks" {
-  description = "IP range to allow rdp connection"
-  default = ["0.0.0.0/0"]
-  type = list(string)
-}
-
 variable "instance_type" {
   description = "aws ec2 instance type"
   type = string
@@ -48,5 +42,14 @@ variable "vms" {
     ami = string
     instance_type = string
     add_user_data = bool
+  }))
+}
+
+variable "security_group_ingress" {
+  description = "list of security group ports"
+  type = list(object({
+    port  = number
+    cidr_blocks = list(string)
+    description = string
   }))
 }

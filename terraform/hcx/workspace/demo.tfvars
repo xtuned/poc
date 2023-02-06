@@ -7,6 +7,18 @@ tags = {
   ManagedBy = "Terraform"
   POC = "dvincent"
 }
+security_group_ingress = [
+  {
+    port        = 3389
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow incoming RDP connections"
+  },
+  {
+    port  = 22
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Allow incoming SSH connections"
+  }
+]
 vms = {
   vm1 = {
     Name = "hcx-vmc-test-03"

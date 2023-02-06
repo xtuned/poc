@@ -12,7 +12,7 @@ resource "tls_private_key" "this" {
 }
 # create key
 resource "aws_key_pair" "this" {
-  key_name   = "${var.stack_name}-ec2-ssh-key"
+  key_name   = "${var.stack_name}-${terraform.workspace}-ec2-ssh-key"
   public_key = tls_private_key.this.public_key_openssh
 }
 
@@ -24,22 +24,19 @@ resource "local_file" "ssh_key" {
 #create windows SG
 # Define the security group for the Windows server
 resource "aws_security_group" "this" {
-  name        = "${var.stack_name}-windows-rdp-sg"
+
+  name        = "${var.stack_name}-${terraform.workspace}-sg"
   description = "allow rdp"
   vpc_id      = var.vpc_id
-  ingress {
-    from_port   = 3389
-    to_port     = 3389
-    protocol    = "tcp"
-    cidr_blocks = var.cidr_blocks
-    description = "Allow incoming RDP connections"
-  }
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = var.cidr_blocks
-    description = "Allow incoming RDP connections"
+  dynamic "ingress" {
+    for_each = var.security_group_ingress
+    iterator = item
+    content {
+      from_port = item.value.port
+      protocol  = "tcp"
+      to_port   = item.value.port
+      description = item.value.description
+    }
   }
   egress {
     from_port   = 0
