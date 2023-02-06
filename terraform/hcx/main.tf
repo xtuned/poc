@@ -34,6 +34,7 @@ resource "aws_security_group" "this" {
     content {
       from_port = item.value.port
       protocol  = "tcp"
+      cidr_blocks = item.value.cidr_blocks
       to_port   = item.value.port
       description = item.value.description
     }
