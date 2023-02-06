@@ -1,6 +1,7 @@
 locals {
   amis = {
-    ubuntu = data.aws_ssm_parameter.ubuntu.value
+    ubuntu_18_04 = data.aws_ssm_parameter.ubuntu_18_04.value
+    ubuntu_20_04 = data.aws_ssm_parameter.ubuntu_20_04.value
     windows = data.aws_ssm_parameter.windows.value
   }
 }
