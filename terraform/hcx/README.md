@@ -36,9 +36,9 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_attach_public_ip"></a> [attach\_public\_ip](#input\_attach\_public\_ip) | choose to attach public ip or not | `bool` | `false` | no |
-| <a name="input_cidr_blocks"></a> [cidr\_blocks](#input\_cidr\_blocks) | IP range to allow rdp connection | `list(string)` | <pre>[<br>  "0.0.0.0/0"<br>]</pre> | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | aws ec2 instance type | `string` | `"t3.large"` | no |
 | <a name="input_region"></a> [region](#input\_region) | region to provision resources | `string` | `"us-east-1"` | no |
+| <a name="input_security_group_ingress"></a> [security\_group\_ingress](#input\_security\_group\_ingress) | list of security group ports | <pre>list(object({<br>    port  = number<br>    cidr_blocks = list(string)<br>    description = string<br>  }))</pre> | n/a | yes |
 | <a name="input_stack_name"></a> [stack\_name](#input\_stack\_name) | stack name for this project | `string` | `"demo"` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | subnet id for this resource | `any` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | tags to associate to this resource | `map(string)` | n/a | yes |
