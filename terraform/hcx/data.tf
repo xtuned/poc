@@ -6,6 +6,27 @@ data "aws_ssm_parameter" "ubuntu_18_04" {
   name = "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
 }
 data "aws_ssm_parameter" "ubuntu_20_04" {
-  name = "/aws/service/canonical/ubuntu/server/18.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
+  name = "/aws/service/canonical/ubuntu/server/20.04/stable/current/amd64/hvm/ebs-gp2/ami-id"
 }
 data "aws_availability_zones" "this" {}
+
+data "aws_ami" "rhel7_7" {
+  most_recent = true
+  owners = ["309956199498"] // Red Hat's Account ID
+  filter {
+    name   = "name"
+    values = ["RHEL-7.7*"]
+  }
+  filter {
+    name   = "architecture"
+    values = ["x86_64"]
+  }
+  filter {
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}

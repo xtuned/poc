@@ -5,7 +5,7 @@ region = "us-west-2"
 tags = {
   StackName = "hcx"
   ManagedBy = "Terraform"
-  POC = "dvincent"
+  POC = "mcsa"
 }
 security_group_ingress = [
   {
@@ -22,14 +22,8 @@ security_group_ingress = [
 vms = {
   vm1 = {
     Name = "hcx-vmc-test-03"
-    ami =  "ubuntu_18_04"
+    ami =  "rhel7_7"
     instance_type = "t3.small"
     add_user_data = false
-  }
-  vm2 = {
-    Name = "hcx-vmc-test-04"
-    ami = "windows"
-    instance_type = "t3.large"
-    add_user_data = true
   }
 }
