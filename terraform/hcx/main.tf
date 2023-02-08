@@ -3,7 +3,7 @@ locals {
     ubuntu_18_04 = data.aws_ssm_parameter.ubuntu_18_04.value
     ubuntu_20_04 = data.aws_ssm_parameter.ubuntu_20_04.value
     windows = data.aws_ssm_parameter.windows.value
-    rhel_7_7 = data.aws_ami.rhel7_7.id
+    rhel7_7 = data.aws_ami.rhel7_7.id
   }
 }
 #generate rsa private key
