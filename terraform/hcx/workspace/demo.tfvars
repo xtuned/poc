@@ -22,7 +22,7 @@ security_group_ingress = [
 vms = {
   vm1 = {
     Name = "hcx-vmc-test-03"
-    ami =  "rhel7_7"
+    ami =  "rhel7_1"
     instance_type = "t3.small"
     add_user_data = false
   }

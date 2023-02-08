@@ -10,12 +10,12 @@ data "aws_ssm_parameter" "ubuntu_20_04" {
 }
 data "aws_availability_zones" "this" {}
 
-data "aws_ami" "rhel7_7" {
+data "aws_ami" "rhel7_1" {
   most_recent = true
   owners = ["309956199498"] // Red Hat's Account ID
   filter {
     name   = "name"
-    values = ["RHEL-7*"]
+    values = ["RHEL-7.1*"]
   }
   filter {
     name   = "architecture"
