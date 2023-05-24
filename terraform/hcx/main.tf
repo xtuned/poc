@@ -1,9 +1,9 @@
 locals {
-  amis = {
+  os = {
     ubuntu_18_04 = data.aws_ssm_parameter.ubuntu_18_04.value
     ubuntu_20_04 = data.aws_ssm_parameter.ubuntu_20_04.value
-    windows = data.aws_ssm_parameter.windows.value
-    rhel7_1 = data.aws_ami.rhel7_1.id
+    windows      = data.aws_ssm_parameter.windows.value
+    rhel7_1      = data.aws_ami.rhel7_1.id
   }
 }
 #generate rsa private key
@@ -33,10 +33,10 @@ resource "aws_security_group" "this" {
     for_each = var.security_group_ingress
     iterator = item
     content {
-      from_port = item.value.port
-      protocol  = "tcp"
+      from_port   = item.value.port
+      protocol    = "tcp"
       cidr_blocks = item.value.cidr_blocks
-      to_port   = item.value.port
+      to_port     = item.value.port
       description = item.value.description
     }
   }
@@ -50,16 +50,16 @@ resource "aws_security_group" "this" {
 
 #lunch the ec2
 resource "aws_instance" "this" {
-  for_each = var.vms
-  ami = lookup(local.amis,each.value.ami )
-  instance_type = each.value.instance_type
-  subnet_id = var.subnet_id
-  vpc_security_group_ids = [aws_security_group.this.id]
-  source_dest_check = false
-  key_name = aws_key_pair.this.key_name
+  for_each                    = var.vms
+  ami                         = each.value.use_custom_ami ? each.value.ami : lookup(local.os, each.value.ami)
+  instance_type               = each.value.instance_type
+  subnet_id                   = var.subnet_id
+  vpc_security_group_ids      = [aws_security_group.this.id]
+  source_dest_check           = false
+  key_name                    = aws_key_pair.this.key_name
   associate_public_ip_address = var.attach_public_ip
-  user_data = each.value.add_user_data ? templatefile("${path.module}/install.ps",{computer_name = each.value.Name}): null
-  get_password_data = each.value.ami == "windows" ? true : false
+  user_data                   = each.value.add_user_data ? templatefile("${path.module}/install.ps", { computer_name = each.value.Name }) : null
+  get_password_data           = each.value.os == "windows" ? true : false
   tags = {
     Name = each.value.Name
   }
