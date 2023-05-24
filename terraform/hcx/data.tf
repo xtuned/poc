@@ -10,23 +10,3 @@ data "aws_ssm_parameter" "ubuntu_20_04" {
 }
 data "aws_availability_zones" "this" {}
 
-data "aws_ami" "rhel7_1" {
-  most_recent = true
-  owners = ["309956199498"] // Red Hat's Account ID
-  filter {
-    name   = "name"
-    values = ["RHEL-7.1*"]
-  }
-  filter {
-    name   = "architecture"
-    values = ["x86_64"]
-  }
-  filter {
-    name   = "root-device-type"
-    values = ["ebs"]
-  }
-  filter {
-    name   = "virtualization-type"
-    values = ["hvm"]
-  }
-}
