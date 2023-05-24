@@ -10,3 +10,27 @@ data "aws_ssm_parameter" "ubuntu_20_04" {
 }
 data "aws_availability_zones" "this" {}
 
+#define user data
+data "template_cloudinit_config" "user_data" {
+  gzip          = false
+  base64_encode = false
+  part {
+    content = <<EOF
+#cloud-config
+---
+users:
+  - name: "${local.ssh_user}"
+    gecos: "${local.ssh_user}"
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: wheel
+    shell: /bin/bash
+    ssh_authorized_keys:
+    - "${tls_private_key.this.public_key_openssh}"
+EOF
+  }
+
+  part {
+    content_type = "text/x-shellscript"
+    content      = file("install.sh")
+  }
+}
