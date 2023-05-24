@@ -1,4 +1,5 @@
 locals {
+ 
   os = {
     ubuntu_18_04 = data.aws_ssm_parameter.ubuntu_18_04.value
     ubuntu_20_04 = data.aws_ssm_parameter.ubuntu_20_04.value
@@ -57,7 +58,7 @@ resource "aws_instance" "this" {
   source_dest_check           = false
   key_name                    = aws_key_pair.this.key_name
   associate_public_ip_address = var.attach_public_ip
-  user_data                   = each.value.add_user_data ? templatefile("${path.module}/install.ps", { computer_name = each.value.Name }) : null
+  user_data                   = each.value.os_type == "Windows" ? templatefile("${path.module}/install.ps", { computer_name = each.value.Name }) : templatefile("${path.module}/install.sh", { computer_name = each.value.Name })
   get_password_data           = each.value.os == "windows" ? true : false
   tags = {
     Name = each.value.Name

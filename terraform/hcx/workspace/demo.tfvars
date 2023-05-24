@@ -32,6 +32,7 @@ vms = {
     use_custom_ami = true
     Name           = "hcx-vmc-test-03"
     os             = "linux"
+    os_type        = "Linux"
     ami            = "ami-087a8e5b8438d3481"
     instance_type  = "t3.small"
     add_user_data  = false

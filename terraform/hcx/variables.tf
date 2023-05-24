@@ -41,6 +41,7 @@ variable "vms" {
     use_custom_ami = bool
     Name           = string
     os             = string
+    os_type        = string
     ami            = string
     instance_type  = string
     add_user_data  = bool
