@@ -51,7 +51,7 @@ resource "aws_security_group" "this" {
 #lunch the ec2
 resource "aws_instance" "this" {
   for_each                    = var.vms
-  ami                         = each.value.use_custom_ami ? each.value.ami : lookup(local.os, each.value.ami)
+  ami                         = each.value.use_custom_ami ? each.value.ami : lookup(local.os, each.value.os)
   instance_type               = each.value.instance_type
   subnet_id                   = var.subnet_id
   vpc_security_group_ids      = [aws_security_group.this.id]
