@@ -29,12 +29,12 @@ vms = {
   #   add_user_data = false
   # },
   vm2 = {
-    use_custom_ami = true
+    use_custom_ami = false
     Name           = "hcx-vmc-test-03"
-    os             = "linux"
-    os_type        = "Linux"
-    ami            = "ami-087a8e5b8438d3481"
-    instance_type  = "t3.small"
+    os             = "Windows"
+    os_type        = "Windows"
+    ami            = ""
+    instance_type  = "t3.large"
     add_user_data  = false
   },
 }
