@@ -14,20 +14,6 @@ data "aws_availability_zones" "this" {}
 data "template_cloudinit_config" "user_data" {
   gzip          = false
   base64_encode = false
-  part {
-    content = <<EOF
-#cloud-config
----
-users:
-  - name: "${local.ssh_user}"
-    gecos: "${local.ssh_user}"
-    sudo: ALL=(ALL) NOPASSWD:ALL
-    groups: wheel
-    shell: /bin/bash
-    ssh_authorized_keys:
-    - "${tls_private_key.this.public_key_openssh}"
-EOF
-  }
 
   part {
     content_type = "text/x-shellscript"

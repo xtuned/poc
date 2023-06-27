@@ -30,9 +30,9 @@ vms = {
   # },
   vm2 = {
     use_custom_ami = false
-    Name           = "hcx-vmc-test-03"
-    os             = "Windows"
-    os_type        = "Windows"
+    Name           = "hcx-ubuntu-set-name"
+    os             = "ubuntu_18_04"
+    os_type        = "Linux"
     ami            = ""
     instance_type  = "t3.large"
     add_user_data  = false

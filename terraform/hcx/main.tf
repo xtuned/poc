@@ -59,7 +59,7 @@ resource "aws_instance" "this" {
   key_name                    = aws_key_pair.this.key_name
   associate_public_ip_address = var.attach_public_ip
   # user_data                   = each.value.os_type == "Windows" ? templatefile("${path.module}/install.ps", { computer_name = each.value.Name }) : templatefile("${path.module}/install.sh", { computer_name = each.value.Name })
-  user_data         = each.value.os_type == "Windows" ? templatefile("${path.module}/install.ps", { computer_name = each.value.Name }) : data.template_cloudinit_config.user_data.rendered
+  user_data         = each.value.os_type == "Windows" ? templatefile("${path.module}/install.ps", { computer_name = each.value.Name }) : templatefile("${path.module}/install.sh", { computer_name = each.value.Name })
   get_password_data = each.value.os == "Windows" ? true : false
   tags = {
     Name = each.value.Name
